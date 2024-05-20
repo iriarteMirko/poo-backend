@@ -71,4 +71,14 @@ class Estudiante(Usuario):
             'codigo': self.get_codigo()
         }
     
+    def matricular_curso(self):
+        pass
     
+    def ver_cursos(self):
+        pass
+    
+    def ver_profesores(self):
+        pass
+    
+    def ver_horarios(self):
+        pass
