@@ -8,73 +8,69 @@ class Usuario(ABC):
         self.__contrasena = contrasena
         self.__cursos = cursos
     
-    # GETTERS       
+    # GETTERS
+    @abstractmethod
     def get_nombre(self):
-        return self.__nombre
+        pass
     
+    @abstractmethod
     def get_apellidos(self):
-        return self.__apellidos
+        pass
     
+    @abstractmethod
     def get_correo(self):
-        return self.__correo
+        pass
     
+    @abstractmethod
     def get_contrasena(self):
-        return self.__contrasena
+        pass
     
+    @abstractmethod
     def get_cursos(self):
-        return self.__cursos
+        pass
     
+    @abstractmethod
     def get_datos(self):
-        print(f'Nombre: {self.get_nombre()}')
-        print(f'Apellidos: {self.get_apellidos()}')
-        print(f'Correo: {self.get_correo()}')
-        print(f'Contrasena: {self.get_contrasena()}')
-        print(f'Cursos: {self.get_cursos()}')
+        pass
     
     # SETTERS
+    @abstractmethod
     def set_nombre(self, nuevo_nombre):
-        self.__nombre = nuevo_nombre
-        print('Nombre cambiado con exito.')
+        pass
     
+    @abstractmethod
     def set_apellidos(self, nuevos_apellidos):
-        self.__apellidos = nuevos_apellidos
-        print('Apellidos cambiados con exito.')
+        pass
     
+    @abstractmethod
     def set_correo(self, nuevo_correo):
-        self.__correo = nuevo_correo
-        print('Correo cambiado con exito.')
+        pass
     
+    @abstractmethod
     def set_contrasena(self, nueva_contrasena):
-        self.__contrasena = nueva_contrasena
-        print('Contrasena cambiada con exito.')
+        pass
     
+    @abstractmethod
     def set_cursos(self, nuevos_cursos):
-        self.__cursos = nuevos_cursos
-        print('Cursos cambiados con exito.')
+        pass
     
+    @abstractmethod
     def set_datos(self):
         pass
     
     # METODOS
+    @abstractmethod
     def enviar_datos(self):
-        return {
-            'nombre': self.get_nombre(),
-            'apellidos': self.get_apellidos(),
-            'correo': self.get_correo(),
-            'cursos': self.get_cursos()
-        }
+        pass
     
+    @abstractmethod
     def registrarse(self):
         pass
     
+    @abstractmethod
     def iniciar_sesion(self):
         pass
     
+    @abstractmethod
     def recuperar_contrasena(self):
         pass
-
-u = Usuario('Juan', 'Perez', 'a@a', '123',)
-
-u.get_datos()
-print(u.enviar_datos())
-u.set_datos()

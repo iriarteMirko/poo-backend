@@ -2,15 +2,29 @@ from usuario import Usuario
 
 
 class Estudiante(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, ciclo, carrera, universidad, codigo):
-        super().__init__(nombre, apellidos, correo, contrasena)
+    def __init__(self, nombre, apellidos, correo, contrasena, cursos, ciclo, carrera, universidad, codigo):
+        super().__init__(nombre, apellidos, correo, contrasena, cursos)
         self.ciclo = ciclo
         self.carrera = carrera
         self.universidad = universidad
         self.codigo = codigo
-        self.cursos = []
     
     # GETTERS
+    def get_nombre(self):
+        return self.__nombre
+    
+    def get_apellidos(self):
+        return self.__apellidos
+    
+    def get_correo(self):
+        return self.__correo
+    
+    def get_contrasena(self):
+        return self.__contrasena
+    
+    def get_cursos(self):
+        return self.__cursos
+    
     def get_ciclo(self):
         return self.ciclo
     
@@ -35,8 +49,29 @@ class Estudiante(Usuario):
         print(f'Carrera: {self.get_carrera()}')
         print(f'Universidad: {self.get_universidad()}')
         print(f'Codigo: {self.get_codigo()}')
+        print(f'Cursos: {self.get_cursos()}')
     
     # SETTERS
+    def set_nombre(self, nuevo_nombre):
+        self.__nombre = nuevo_nombre
+        print('Nombre cambiado con exito.')
+    
+    def set_apellidos(self, nuevos_apellidos):
+        self.__apellidos = nuevos_apellidos
+        print('Apellidos cambiados con exito.')
+    
+    def set_correo(self, nuevo_correo):
+        self.__correo = nuevo_correo
+        print('Correo cambiado con exito.')
+    
+    def set_contrasena(self, nueva_contrasena):
+        self.__contrasena = nueva_contrasena
+        print('Contrasena cambiada con exito.')
+    
+    def set_cursos(self, nuevos_cursos):
+        self.__cursos = nuevos_cursos
+        print('Cursos cambiados con exito.')
+    
     def set_ciclo(self, nuevo_ciclo):
         self.ciclo = nuevo_ciclo
         print('Ciclo cambiado con exito.')
@@ -54,7 +89,8 @@ class Estudiante(Usuario):
         print('Codigo cambiado con exito.')
     
     def set_cursos(self, nuevos_cursos):
-        return super().set_cursos(nuevos_cursos)
+        self.cursos = nuevos_cursos
+        print('Cursos cambiados con exito.')
     
     def set_datos(self):
         pass
@@ -68,9 +104,11 @@ class Estudiante(Usuario):
             'ciclo': self.get_ciclo(),
             'carrera': self.get_carrera(),
             'universidad': self.get_universidad(),
-            'codigo': self.get_codigo()
+            'codigo': self.get_codigo(),
+            'cursos': self.get_cursos()
         }
     
+    # CURSO
     def matricular_curso(self):
         pass
     

@@ -1,13 +1,12 @@
 from profesor import Profesor
-from estudiante import Estudiante
 
 
 class Curso:
-    def __init__(self, nombre, descripcion, profesor):
+    def __init__(self, nombre, descripcion, profesor, estudiantes=[]):
         self.nombre = nombre
         self.descripcion = descripcion
         self.profesor = profesor
-        self.estudiantes = []
+        self.estudiantes = estudiantes
     
     def agregar_estudiante(self, estudiante):
         self.estudiantes.append(estudiante)
