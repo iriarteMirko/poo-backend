@@ -22,7 +22,13 @@ class Usuario(ABC):
         return self.__contrasena
     
     def get_cursos(self):
-        return self.cursos
+        lista_cursos = []
+        for curso in self.cursos:
+            lista_cursos.append(curso.nombre)
+        if lista_cursos:
+            return lista_cursos
+        else:
+            return []
     
     @abstractmethod
     def get_datos(self):
@@ -40,9 +46,6 @@ class Usuario(ABC):
     
     def set_contrasena(self, nueva_contrasena):
         self.__contrasena = nueva_contrasena
-    
-    def set_cursos(self, nuevos_cursos):
-        self.cursos = nuevos_cursos
     
     @abstractmethod
     def set_datos(self):

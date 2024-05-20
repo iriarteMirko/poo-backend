@@ -21,14 +21,13 @@ class Curso:
             return []
     
     def get_profesor(self):
-        print(self.profesor.get_nombre())
+        return self.profesor.get_nombre()
     
     def get_datos(self):
         print(f'CURSO: {self.nombre}')
         print(f' - Descripcion: {self.descripcion}')
-        print(f' - Profesor: {self.profesor.get_nombre()}')
+        print(f' - Profesor: {self.get_profesor()}')
         print(f' - Estudiantes: {self.get_estudiantes()}')
-        print('\n')
 
 
 class CursoFactory:
