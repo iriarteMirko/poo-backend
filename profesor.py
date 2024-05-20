@@ -1,5 +1,5 @@
 from usuario import Usuario
-from curso import CursoFactory
+from curso_factory import CursoFactory
 
 
 class Profesor(Usuario):

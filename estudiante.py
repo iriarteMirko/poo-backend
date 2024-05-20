@@ -75,8 +75,9 @@ class Estudiante(Usuario):
     def ver_profesores(self):
         lista_profesores = []
         for curso in self.cursos:
-            if curso.profesor not in lista_profesores:
-                lista_profesores.append(curso.profesor)
+            if curso.profesor.get_nombre() not in lista_profesores:
+                lista_profesores.append(curso.profesor.get_nombre())
+        print(lista_profesores)
     
     # HORARIO
     def ver_horarios(self):

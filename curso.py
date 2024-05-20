@@ -16,21 +16,15 @@ class Curso:
         for estudiante in self.estudiantes:
             lista_estudiantes.append(estudiante.get_nombre())
         if lista_estudiantes:
-            return lista_estudiantes
+            print(lista_estudiantes)
         else:
             return []
     
     def get_profesor(self):
-        return self.profesor.get_nombre()
+        print(self.profesor.get_nombre() + ' ' + self.profesor.get_apellidos())
     
     def get_datos(self):
         print(f'CURSO: {self.nombre}')
         print(f' - Descripcion: {self.descripcion}')
         print(f' - Profesor: {self.get_profesor()}')
         print(f' - Estudiantes: {self.get_estudiantes()}')
-
-
-class CursoFactory:
-    @staticmethod
-    def crear_curso(nombre, descripcion, profesor):
-        return Curso(nombre, descripcion, profesor)
