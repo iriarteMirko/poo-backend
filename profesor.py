@@ -5,43 +5,34 @@ from curso_factory import CursoFactory
 class Profesor(Usuario):
     def __init__(self, nombre, apellidos, correo, contrasena, profesion, centro_laboral):
         super().__init__(nombre, apellidos, correo, contrasena)
-        self.profesesion = profesion
+        self.profesion = profesion
         self.centro_laboral = centro_laboral
     
     # GETTERS
     def get_datos(self):
-        print(f'PROFESOR: {self.get_nombre()} {self.get_apellidos()}')
-        print(f' - Correo: {self.get_correo()}')
-        print(f' - Contrasena: {self.get_contrasena()}')
-        print(f' - Profesion: {self.profesesion}')
-        print(f' - Centro laboral: {self.centro_laboral}')
-        print(f' - Cursos: {self.cursos}')
-    
-    # SETTERS
-    def set_datos(self, nuevo_nombre, nuevos_apellidos, nuevo_correo, nueva_contrasena, nueva_profesion, nuevo_centro_laboral): 
-        self.set_nombre(nuevo_nombre)
-        self.set_apellidos(nuevos_apellidos)
-        self.set_correo(nuevo_correo)
-        self.set_contrasena(nueva_contrasena)
-        self.profesesion = nueva_profesion
-        self.centro_laboral = nuevo_centro_laboral
-    
-    # METODOS
-    def enviar_datos(self):
         return {
             'nombre': self.get_nombre(),
             'apellidos': self.get_apellidos(),
             'correo': self.get_correo(),
-            'profesion': self.profesesion,
+            'profesion': self.profesion,
             'centro_laboral': self.centro_laboral,
-            'cursos': self.cursos
+            'cursos': self.get_cursos()
         }
+    
+    # SETTERS
+    def set_datos(self, **kwargs):
+        self.set_nombre(kwargs.get('nombre', self.get_nombre()))
+        self.set_apellidos(kwargs.get('apellidos', self.get_apellidos()))
+        self.set_correo(kwargs.get('correo', self.get_correo()))
+        self.set_contrasena(kwargs.get('contrasena', self.get_contrasena()))
+        self.profesion = kwargs.get('profesion', self.profesion)
+        self.centro_laboral = kwargs.get('centro_laboral', self.centro_laboral)
     
     # CURSO
     def crear_curso(self, nombre, descripcion):
         factory = CursoFactory()
         curso = factory.crear_curso(nombre, descripcion, self)
-        self.cursos.append(curso)
+        self._cursos.append(curso)
         print(f'Curso {curso.nombre} creado con exito.')
         return curso
     
@@ -53,16 +44,16 @@ class Profesor(Usuario):
         print(f'Curso {curso.nombre} modificado con exito.')
     
     def eliminar_curso(self, curso):
-        self.cursos.remove(curso)
+        self._cursos.remove(curso)
         print(f'Curso {curso.nombre} eliminado con exito.')
     
     # ESTUDIANTES
     def ver_estudiantes(self):
         lista_estudiantes = []
-        for curso in self.cursos:
+        for curso in self._cursos:
             for estudiante in curso.estudiantes:
-                lista_estudiantes.append(estudiante.get_nombre())
-        print(lista_estudiantes)
+                lista_estudiantes.append(estudiante.get_nombre()+ ' del curso: ' + curso.nombre)
+        return lista_estudiantes
     
     # HORARIO
     def crear_horario(self):

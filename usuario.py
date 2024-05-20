@@ -2,33 +2,27 @@ from abc import ABC, abstractmethod
 
 class Usuario(ABC):
     def __init__(self, nombre, apellidos, correo, contrasena):
-        self.__nombre = nombre
-        self.__apellidos = apellidos
-        self.__correo = correo
-        self.__contrasena = contrasena
-        self.cursos = []
+        self._nombre = nombre
+        self._apellidos = apellidos
+        self._correo = correo
+        self._contrasena = contrasena
+        self._cursos = []
     
     # GETTERS
     def get_nombre(self):
-        return self.__nombre
+        return self._nombre
     
     def get_apellidos(self):
-        return self.__apellidos
+        return self._apellidos
     
     def get_correo(self):
-        return self.__correo
+        return self._correo
     
     def get_contrasena(self):
-        return self.__contrasena
+        return self._contrasena
     
     def get_cursos(self):
-        lista_cursos = []
-        for curso in self.cursos:
-            lista_cursos.append(curso.nombre)
-        if lista_cursos:
-            print(lista_cursos)
-        else:
-            return []
+        return [curso.nombre for curso in self._cursos]
     
     @abstractmethod
     def get_datos(self):
@@ -36,26 +30,22 @@ class Usuario(ABC):
     
     # SETTERS
     def set_nombre(self, nuevo_nombre):
-        self.__nombre = nuevo_nombre
+        self._nombre = nuevo_nombre
     
     def set_apellidos(self, nuevos_apellidos):
-        self.__apellidos = nuevos_apellidos
+        self._apellidos = nuevos_apellidos
     
     def set_correo(self, nuevo_correo):
-        self.__correo = nuevo_correo
+        self._correo = nuevo_correo
     
     def set_contrasena(self, nueva_contrasena):
-        self.__contrasena = nueva_contrasena
+        self._contrasena = nueva_contrasena
     
     @abstractmethod
     def set_datos(self):
         pass
     
-    # METODOS
-    @abstractmethod
-    def enviar_datos(self):
-        pass
-    
+    # METODOS    
     def iniciar_sesion(self, correo, contrasena):
         if correo == self.get_correo() and contrasena == self.get_contrasena():
             print('Sesion iniciada con exito.')
