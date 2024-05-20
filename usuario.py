@@ -53,6 +53,21 @@ class Usuario():
             'correo': self.get_correo(),
             'contrasena': self.get_contrasena()
         }
+    
+    def registrarse(self):
+        print('Registrando...')
+        print('Datos registrados con exito.')
+    
+    def iniciar_sesion(self):
+        print('Iniciando sesion...')
+        print('Sesion iniciada con exito.')
+    
+    def recuperar_contrasena(self):
+        print('Recuperando contrasena...')
+        print('Contrasena recuperada con exito.')
 
 u = Usuario('Juan', 'Perez', 'a@a', '123',)
-u.mostrar_datos()
+
+u.get_datos()
+print(u.enviar_datos())
+u.set_datos()
