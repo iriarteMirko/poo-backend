@@ -1,5 +1,6 @@
 from usuario import Usuario
 from curso_factory import CursoFactory
+from horario_factory import HorarioFactory
 
 
 class Profesor(Usuario):
@@ -56,17 +57,24 @@ class Profesor(Usuario):
         return lista_estudiantes
     
     # HORARIO
-    def crear_horario(self):
-        pass
+    def crear_horario(self, curso, dia, hora_inicio, hora_fin):
+        factory = HorarioFactory()
+        horario = factory.crear_horario(curso, dia, hora_inicio, hora_fin)
+        curso.horarios.append(horario)
+        print(f'Horario creado con exito.')
     
-    def modificar_horario(self):
-        pass
+    def modificar_horario(self, horario, dia=None, hora_inicio=None, hora_fin=None):
+        if dia:
+            horario.dia = dia
+        if hora_inicio:
+            horario.hora_inicio = hora_inicio
+        if hora_fin:
+            horario.hora_fin = hora_fin
+        print('Horario modificado con exito.')
     
-    def eliminar_horario(self):
-        pass
-    
-    def ver_horario(self):
-        pass
+    def eliminar_horario(self, curso, horario):
+        curso.horarios.remove(horario)
+        print('Horario eliminado con exito.')
     
     # NOTIFICACIONES
     def enviar_notificacion(self):

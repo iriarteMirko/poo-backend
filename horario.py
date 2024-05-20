@@ -16,11 +16,5 @@ class Horario(IHorario):
             'hora_fin': self.hora_fin
         }
     
-    def modificar_horario(self, dia=None, hora_inicio=None, hora_fin=None):
-        if dia:
-            self.dia = dia
-        if hora_inicio:
-            self.hora_inicio = hora_inicio
-        if hora_fin:
-            self.hora_fin = hora_fin
-        print('Horario modificado con éxito.')
+    def get_curso(self):
+        return self.curso.nombre

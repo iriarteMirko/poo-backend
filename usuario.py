@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Usuario(ABC):
     def __init__(self, nombre, apellidos, correo, contrasena):
         self._nombre = nombre
@@ -24,9 +25,8 @@ class Usuario(ABC):
     def get_cursos(self):
         return [curso.nombre for curso in self._cursos]
     
-    @abstractmethod
-    def get_datos(self):
-        pass
+    def get_horarios(self):
+        return [horario.get_datos() for horario in self._horarios]
     
     # SETTERS
     def set_nombre(self, nuevo_nombre):
@@ -41,10 +41,6 @@ class Usuario(ABC):
     def set_contrasena(self, nueva_contrasena):
         self._contrasena = nueva_contrasena
     
-    @abstractmethod
-    def set_datos(self):
-        pass
-    
     # METODOS    
     def iniciar_sesion(self, correo, contrasena):
         if correo == self.get_correo() and contrasena == self.get_contrasena():
@@ -57,3 +53,12 @@ class Usuario(ABC):
             print(f'La contrasena es: {self.get_contrasena()}')
         else:
             print('Correo incorrecto.')
+    
+    # METODOS ABSTRACTOS
+    @abstractmethod
+    def get_datos(self):
+        pass
+    
+    @abstractmethod
+    def set_datos(self):
+        pass

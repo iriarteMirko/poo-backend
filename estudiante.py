@@ -57,7 +57,3 @@ class Estudiante(Usuario):
             if curso.profesor.get_nombre() not in lista_profesores:
                 lista_profesores.append(curso.profesor.get_nombre() + ' del curso: ' + curso.nombre)
         return lista_profesores
-    
-    # HORARIO
-    def ver_horarios(self):
-        pass

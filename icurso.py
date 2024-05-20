@@ -7,11 +7,7 @@ class ICurso(ABC):
         pass
     
     @abstractmethod
-    def agregar_estudiante(self, estudiante):
-        pass
-    
-    @abstractmethod
-    def eliminar_estudiante(self, estudiante):
+    def get_profesor(self):
         pass
     
     @abstractmethod
@@ -19,5 +15,5 @@ class ICurso(ABC):
         pass
     
     @abstractmethod
-    def get_profesor(self):
+    def get_horarios(self):
         pass

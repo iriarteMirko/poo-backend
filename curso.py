@@ -14,18 +14,16 @@ class Curso(ICurso):
             'nombre': self.nombre,
             'descripcion': self.descripcion,
             'profesor': self.get_profesor(),
-            'estudiantes': self.get_estudiantes()
+            'estudiantes': self.get_estudiantes(),
+            'horarios': self.get_horarios()
         }
-    
-    def get_estudiantes(self):
-        return [estudiante.get_nombre() for estudiante in self.estudiantes]
     
     def get_profesor(self):
         return self.profesor.get_nombre() + ' ' + self.profesor.get_apellidos()
     
-    def agregar_estudiante(self, estudiante):
-        self.estudiantes.append(estudiante)
+    def get_estudiantes(self):
+        return [estudiante.get_nombre() for estudiante in self.estudiantes]
     
-    def eliminar_estudiante(self, estudiante):
-        self.estudiantes.remove(estudiante)
-    
+    def get_horarios(self):
+        return [horario.get_datos() for horario in self.horarios]
+
