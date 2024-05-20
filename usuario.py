@@ -1,9 +1,12 @@
-class Usuario():
-    def __init__(self, nombre, apellidos, correo, contrasena):
+from abc import ABC, abstractmethod
+
+class Usuario(ABC):
+    def __init__(self, nombre, apellidos, correo, contrasena, cursos=[]):
         self.__nombre = nombre
         self.__apellidos = apellidos
         self.__correo = correo
         self.__contrasena = contrasena
+        self.__cursos = cursos
     
     # GETTERS       
     def get_nombre(self):
@@ -18,11 +21,15 @@ class Usuario():
     def get_contrasena(self):
         return self.__contrasena
     
+    def get_cursos(self):
+        return self.__cursos
+    
     def get_datos(self):
         print(f'Nombre: {self.get_nombre()}')
         print(f'Apellidos: {self.get_apellidos()}')
         print(f'Correo: {self.get_correo()}')
         print(f'Contrasena: {self.get_contrasena()}')
+        print(f'Cursos: {self.get_cursos()}')
     
     # SETTERS
     def set_nombre(self, nuevo_nombre):
@@ -41,11 +48,12 @@ class Usuario():
         self.__contrasena = nueva_contrasena
         print('Contrasena cambiada con exito.')
     
+    def set_cursos(self, nuevos_cursos):
+        self.__cursos = nuevos_cursos
+        print('Cursos cambiados con exito.')
+    
     def set_datos(self):
-        self.set_nombre(input('Nuevo nombre: '))
-        self.set_apellidos(input('Nuevos apellidos: '))
-        self.set_correo(input('Nuevo correo: '))
-        self.set_contrasena(input('Nueva contrasena: '))
+        pass
     
     # METODOS
     def enviar_datos(self):
@@ -53,6 +61,7 @@ class Usuario():
             'nombre': self.get_nombre(),
             'apellidos': self.get_apellidos(),
             'correo': self.get_correo(),
+            'cursos': self.get_cursos()
         }
     
     def registrarse(self):

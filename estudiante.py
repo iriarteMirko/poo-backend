@@ -8,6 +8,7 @@ class Estudiante(Usuario):
         self.carrera = carrera
         self.universidad = universidad
         self.codigo = codigo
+        self.cursos = []
     
     # GETTERS
     def get_ciclo(self):
@@ -21,6 +22,9 @@ class Estudiante(Usuario):
     
     def get_codigo(self):
         return self.codigo
+    
+    def get_cursos(self):
+        return self.cursos
     
     def get_datos(self):
         print(f'Nombre: {self.get_nombre()}')
@@ -49,15 +53,11 @@ class Estudiante(Usuario):
         self.codigo = nuevo_codigo
         print('Codigo cambiado con exito.')
     
+    def set_cursos(self, nuevos_cursos):
+        return super().set_cursos(nuevos_cursos)
+    
     def set_datos(self):
-        self.set_nombre(input('Nuevo nombre: '))
-        self.set_apellidos(input('Nuevos apellidos: '))
-        self.set_correo(input('Nuevo correo: '))
-        self.set_contrasena(input('Nueva contrasena: '))
-        self.set_ciclo(input('Nuevo ciclo: '))
-        self.set_carrera(input('Nueva carrera: '))
-        self.set_universidad(input('Nueva universidad: '))
-        self.set_codigo(input('Nuevo codigo: '))
+        pass
     
     # METODOS
     def enviar_datos(self):

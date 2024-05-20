@@ -1,4 +1,5 @@
 from usuario import Usuario
+from curso import Curso, CursoFactory
 
 
 class Profesor(Usuario):
@@ -6,6 +7,7 @@ class Profesor(Usuario):
         super().__init__(nombre, apellidos, correo, contrasena)
         self.profesesion = profesion
         self.centro_laboral = centro_laboral
+        self.cursos = []
     
     # GETTERS
     def get_profesion(self):
@@ -13,6 +15,9 @@ class Profesor(Usuario):
     
     def get_centro_laboral(self):
         return self.centro_laboral
+    
+    def get_cursos(self):
+        return self.cursos
     
     def get_datos(self):
         print(f'Nombre: {self.get_nombre()}')
@@ -31,13 +36,11 @@ class Profesor(Usuario):
         self.centro_laboral = nuevo_centro_laboral
         print('Centro laboral cambiado con exito.')
     
+    def set_cursos(self, nuevos_cursos):
+        return super().set_cursos(nuevos_cursos)
+    
     def set_datos(self):
-        self.set_nombre(input('Nuevo nombre: '))
-        self.set_apellidos(input('Nuevos apellidos: '))
-        self.set_correo(input('Nuevo correo: '))
-        self.set_contrasena(input('Nueva contrasena: '))
-        self.set_profesion(input('Nueva profesion: '))
-        self.set_centro_laboral(input('Nuevo centro laboral: '))
+        pass
     
     # METODOS
     def enviar_datos(self):
@@ -50,17 +53,23 @@ class Profesor(Usuario):
         }
     
     # CURSO
-    def crear_curso(self):
-        pass
+    def crear_curso(self, nombre, descripcion):
+        factory = CursoFactory()
+        curso = factory.crear_curso(nombre, descripcion, self)
+        self.cursos.append(curso)
+        print(f'Curso {curso.nombre} creado con exito.')
+        return curso
     
-    def modificar_curso(self):
-        pass
+    def modificar_curso(self, curso, nombre=None, descripcion=None):
+        if nombre:
+            curso.nombre = nombre
+        if descripcion:
+            curso.descripcion = descripcion
+        print(f'Curso {curso.nombre} modificado con exito.')
     
-    def eliminar_curso(self):
-        pass
-    
-    def publicar_curso(self):
-        pass    
+    def eliminar_curso(self, curso):
+        self.cursos.remove(curso)
+        print(f'Curso {curso.nombre} eliminado con exito.')
     
     # HORARIO
     def crear_horario(self):
