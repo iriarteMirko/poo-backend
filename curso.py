@@ -1,31 +1,34 @@
-from profesor import Profesor
-
-
 class Curso:
-    def __init__(self, nombre, descripcion, profesor, estudiantes=[]):
+    def __init__(self, nombre, descripcion, profesor):
         self.nombre = nombre
         self.descripcion = descripcion
         self.profesor = profesor
-        self.estudiantes = estudiantes
+        self.estudiantes = []
     
     def agregar_estudiante(self, estudiante):
         self.estudiantes.append(estudiante)
-        print(f'Estudiante {estudiante.get_nombre()} agregado con exito.')
     
     def eliminar_estudiante(self, estudiante):
         self.estudiantes.remove(estudiante)
-        print(f'Estudiante {estudiante.get_nombre()} eliminado con exito.')
     
-    def mostrar_estudiantes(self):
+    def get_estudiantes(self):
+        lista_estudiantes = []
         for estudiante in self.estudiantes:
-            print(estudiante.get_nombre())
+            lista_estudiantes.append(estudiante.get_nombre())
+        if lista_estudiantes:
+            return lista_estudiantes
+        else:
+            return []
     
-    def mostrar_curso(self):
-        print(f'Nombre: {self.nombre}')
-        print(f'Descripcion: {self.descripcion}')
-        print(f'Profesor: {Profesor.get_nombre()}')
-        print('Estudiantes:')
-        self.mostrar_estudiantes()
+    def get_profesor(self):
+        print(self.profesor.get_nombre())
+    
+    def get_datos(self):
+        print(f'CURSO: {self.nombre}')
+        print(f' - Descripcion: {self.descripcion}')
+        print(f' - Profesor: {self.profesor.get_nombre()}')
+        print(f' - Estudiantes: {self.get_estudiantes()}')
+        print('\n')
 
 
 class CursoFactory:

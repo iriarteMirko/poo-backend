@@ -3,77 +3,35 @@ from curso import CursoFactory
 
 
 class Profesor(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, cursos, profesion, centro_laboral):
-        super().__init__(nombre, apellidos, correo, contrasena, cursos)
-        self.profesesion = profesion
-        self.centro_laboral = centro_laboral
+    def __init__(self, nombre, apellidos, correo, contrasena, profesion, centro_laboral):
+        super().__init__(nombre, apellidos, correo, contrasena)
+        self.__profesesion = profesion
+        self.__centro_laboral = centro_laboral
     
-    # GETTERS
-    def get_nombre(self):
-        return self.__nombre
-    
-    def get_apellidos(self):
-        return self.__apellidos
-    
-    def get_correo(self):
-        return self.__correo
-    
-    def get_contrasena(self):
-        return self.__contrasena
-    
-    def get_cursos(self):
-        return self.__cursos
-    
+    # GETTERS    
     def get_profesion(self):
-        return self.profesesion
+        return self.__profesesion
     
     def get_centro_laboral(self):
-        return self.centro_laboral
-    
-    def get_cursos(self):
-        return self.cursos
+        return self.__centro_laboral
     
     def get_datos(self):
-        print(f'Nombre: {self.get_nombre()}')
-        print(f'Apellidos: {self.get_apellidos()}')
-        print(f'Correo: {self.get_correo()}')
-        print(f'Contrasena: {self.get_contrasena()}')
-        print(f'Profesion: {self.get_profesion()}')
-        print(f'Centro laboral: {self.get_centro_laboral()}')
-        print(f'Cursos: {self.get_cursos()}')
+        print(f'PROFESOR: {self.get_nombre()} {self.get_apellidos()}')
+        print(f' - Correo: {self.get_correo()}')
+        print(f' - Contrasena: {self.get_contrasena()}')
+        print(f' - Profesion: {self.get_profesion()}')
+        print(f' - Centro laboral: {self.get_centro_laboral()}')
+        print(f' - Cursos: {self.get_cursos()}')
+        print('\n')
     
     # SETTERS
-    def set_nombre(self, nuevo_nombre):
-        self.__nombre = nuevo_nombre
-        print('Nombre cambiado con exito.')
-    
-    def set_apellidos(self, nuevos_apellidos):
-        self.__apellidos = nuevos_apellidos
-        print('Apellidos cambiados con exito.')
-    
-    def set_correo(self, nuevo_correo):
-        self.__correo = nuevo_correo
-        print('Correo cambiado con exito.')
-    
-    def set_contrasena(self, nueva_contrasena):
-        self.__contrasena = nueva_contrasena
-        print('Contrasena cambiada con exito.')
-    
-    def set_cursos(self, nuevos_cursos):
-        self.__cursos = nuevos_cursos
-        print('Cursos cambiados con exito.')
-    
     def set_profesion(self, nueva_profesion):
-        self.profesesion = nueva_profesion
+        self.__profesesion = nueva_profesion
         print('Profesion cambiada con exito.')
     
     def set_centro_laboral(self, nuevo_centro_laboral):
-        self.centro_laboral = nuevo_centro_laboral
+        self.__centro_laboral = nuevo_centro_laboral
         print('Centro laboral cambiado con exito.')
-    
-    def set_cursos(self, nuevos_cursos):
-        self.cursos = nuevos_cursos
-        print('Cursos cambiados con exito.')
     
     def set_datos(self):
         pass
@@ -88,6 +46,14 @@ class Profesor(Usuario):
             'centro_laboral': self.get_centro_laboral(),
             'cursos': self.get_cursos()
         }
+    
+    def registrarse(self, nombre, apellidos, correo, contrasena, profesion, centro_laboral):
+        self.set_nombre(nombre)
+        self.set_apellidos(apellidos)
+        self.set_correo(correo)
+        self.set_contrasena(contrasena)
+        self.set_profesion(profesion)
+        self.set_centro_laboral(centro_laboral)
     
     # CURSO
     def crear_curso(self, nombre, descripcion):

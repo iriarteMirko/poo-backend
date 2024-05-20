@@ -1,58 +1,48 @@
 from abc import ABC, abstractmethod
 
 class Usuario(ABC):
-    def __init__(self, nombre, apellidos, correo, contrasena, cursos=[]):
+    def __init__(self, nombre, apellidos, correo, contrasena):
         self.__nombre = nombre
         self.__apellidos = apellidos
         self.__correo = correo
         self.__contrasena = contrasena
-        self.__cursos = cursos
+        self.cursos = []
     
     # GETTERS
-    @abstractmethod
     def get_nombre(self):
-        pass
+        return self.__nombre
     
-    @abstractmethod
     def get_apellidos(self):
-        pass
+        return self.__apellidos
     
-    @abstractmethod
     def get_correo(self):
-        pass
+        return self.__correo
     
-    @abstractmethod
     def get_contrasena(self):
-        pass
+        return self.__contrasena
     
-    @abstractmethod
     def get_cursos(self):
-        pass
+        return self.cursos
     
     @abstractmethod
     def get_datos(self):
         pass
     
     # SETTERS
-    @abstractmethod
     def set_nombre(self, nuevo_nombre):
-        pass
+        self.__nombre = nuevo_nombre
     
-    @abstractmethod
     def set_apellidos(self, nuevos_apellidos):
-        pass
+        self.__apellidos = nuevos_apellidos
     
-    @abstractmethod
     def set_correo(self, nuevo_correo):
-        pass
+        self.__correo = nuevo_correo
     
-    @abstractmethod
     def set_contrasena(self, nueva_contrasena):
-        pass
+        self.__contrasena = nueva_contrasena
     
-    @abstractmethod
     def set_cursos(self, nuevos_cursos):
-        pass
+        self.cursos = nuevos_cursos
     
     @abstractmethod
     def set_datos(self):
@@ -67,10 +57,14 @@ class Usuario(ABC):
     def registrarse(self):
         pass
     
-    @abstractmethod
-    def iniciar_sesion(self):
-        pass
+    def iniciar_sesion(self, correo, contrasena):
+        if correo == self.get_correo() and contrasena == self.get_contrasena():
+            print('Sesion iniciada con exito.')
+        else:
+            print('Correo o contrasena incorrectos.')
     
-    @abstractmethod
-    def recuperar_contrasena(self):
-        pass
+    def recuperar_contrasena(self, correo):
+        if correo == self.get_correo():
+            print(f'La contrasena es: {self.get_contrasena()}')
+        else:
+            print('Correo incorrecto.')
