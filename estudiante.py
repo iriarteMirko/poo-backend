@@ -2,7 +2,7 @@ from usuario import Usuario
 
 
 class Estudiante(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, ciclo, carrera, universidad, codigo):
+    def __init__(self, nombre, apellidos, correo, contrasena, ciclo=None, carrera=None, universidad=None, codigo=None):
         super().__init__(nombre, apellidos, correo, contrasena)
         self.ciclo = ciclo
         self.carrera = carrera
@@ -43,16 +43,6 @@ class Estudiante(Usuario):
             'codigo': self.codigo,
             'cursos': self.cursos
         }
-    
-    def registrarse(self, nombre, apellidos, correo, contrasena, ciclo, carrera, universidad, codigo):
-        self.set_nombre(nombre)
-        self.set_apellidos(apellidos)
-        self.set_correo(correo)
-        self.set_contrasena(contrasena)
-        self.ciclo = ciclo
-        self.carrera = carrera
-        self.universidad = universidad
-        self.codigo = codigo
     
     # CURSO
     def matricular_curso(self, curso):

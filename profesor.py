@@ -3,7 +3,7 @@ from curso_factory import CursoFactory
 
 
 class Profesor(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, profesion, centro_laboral):
+    def __init__(self, nombre, apellidos, correo, contrasena, profesion=None, centro_laboral=None):
         super().__init__(nombre, apellidos, correo, contrasena)
         self.profesesion = profesion
         self.centro_laboral = centro_laboral
@@ -37,14 +37,6 @@ class Profesor(Usuario):
             'cursos': self.cursos
         }
     
-    def registrarse(self, nombre, apellidos, correo, contrasena, profesion, centro_laboral):
-        self.set_nombre(nombre)
-        self.set_apellidos(apellidos)
-        self.set_correo(correo)
-        self.set_contrasena(contrasena)
-        self.profesesion = profesion
-        self.centro_laboral = centro_laboral
-    
     # CURSO
     def crear_curso(self, nombre, descripcion):
         factory = CursoFactory()
@@ -64,6 +56,14 @@ class Profesor(Usuario):
         self.cursos.remove(curso)
         print(f'Curso {curso.nombre} eliminado con exito.')
     
+    # ESTUDIANTES
+    def ver_estudiantes(self):
+        lista_estudiantes = []
+        for curso in self.cursos:
+            for estudiante in curso.estudiantes:
+                lista_estudiantes.append(estudiante.get_nombre())
+        print(lista_estudiantes)
+    
     # HORARIO
     def crear_horario(self):
         pass
@@ -75,10 +75,6 @@ class Profesor(Usuario):
         pass
     
     def ver_horario(self):
-        pass
-    
-    # ESTUDIANTES
-    def ver_estudiantes(self):
         pass
     
     # NOTIFICACIONES

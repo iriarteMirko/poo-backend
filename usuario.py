@@ -56,10 +56,6 @@ class Usuario(ABC):
     def enviar_datos(self):
         pass
     
-    @abstractmethod
-    def registrarse(self):
-        pass
-    
     def iniciar_sesion(self, correo, contrasena):
         if correo == self.get_correo() and contrasena == self.get_contrasena():
             print('Sesion iniciada con exito.')
