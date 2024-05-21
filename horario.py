@@ -17,4 +17,4 @@ class Horario(IHorario):
         }
     
     def get_curso(self):
-        return self.curso.nombre
+        return self.curso

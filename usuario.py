@@ -25,9 +25,6 @@ class Usuario(ABC):
     def get_cursos(self):
         return [curso.nombre for curso in self._cursos]
     
-    def get_horarios(self):
-        return [horario.get_datos() for horario in self._horarios]
-    
     # SETTERS
     def set_nombre(self, nuevo_nombre):
         self._nombre = nuevo_nombre

@@ -1,4 +1,5 @@
 from usuario import Usuario
+from calificacion import Calificacion
 
 
 class Estudiante(Usuario):
@@ -8,6 +9,7 @@ class Estudiante(Usuario):
         self.carrera = carrera
         self.universidad = universidad
         self.codigo = codigo
+        self.calificaciones = []
     
     # GETTERS
     def get_datos(self):
@@ -38,7 +40,7 @@ class Estudiante(Usuario):
         if curso in self._cursos:
             print(f'Estudiante {self.get_nombre()} ya esta matriculado en el curso "{curso.nombre}".')
         else:
-            curso.agregar_estudiante(self)
+            curso.estudiantes.append(self)
             self._cursos.append(curso)
             print(f'Estudiante {self.get_nombre()} matriculado al curso "{curso.nombre}" con exito.')
     
@@ -46,7 +48,7 @@ class Estudiante(Usuario):
         if curso not in self._cursos:
             print(f'Estudiante {self.get_nombre()} no esta matriculado en el curso "{curso.nombre}".')
         else:
-            curso.eliminar_estudiante(self)
+            curso.estudiantes.remove(self)
             self._cursos.remove(curso)
             print(f'Estudiante {self.get_nombre()} retirado del curso "{curso.nombre}".')
     
@@ -55,5 +57,15 @@ class Estudiante(Usuario):
         lista_profesores = []
         for curso in self._cursos:
             if curso.profesor.get_nombre() not in lista_profesores:
-                lista_profesores.append(curso.profesor.get_nombre() + ' del curso: ' + curso.nombre)
+                lista_profesores.append(curso.profesor.get_nombre())
         return lista_profesores
+    
+    def calificar_profesor(self, profesor, puntuacion):
+        for calificacion in self.calificaciones:
+            if calificacion.get_profesor() == profesor:
+                return f'Estudiante {self.get_nombre()} ya ha calificado al profesor {profesor.get_nombre()}.'
+        
+        calificacion = Calificacion(self, profesor, puntuacion)
+        self.calificaciones.append(calificacion)
+        profesor.recibir_calificacion(calificacion)
+        return f'Profesor {profesor.get_nombre()} calificado con éxito.'
