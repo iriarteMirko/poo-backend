@@ -1,4 +1,7 @@
-class Curso:
+from icurso import ICurso
+
+
+class Curso(ICurso):
     def __init__(self, nombre, descripcion, profesor):
         self.nombre = nombre
         self.descripcion = descripcion

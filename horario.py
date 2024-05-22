@@ -1,4 +1,7 @@
-class Horario:
+from ihorario import IHorario
+
+
+class Horario(IHorario):
     def __init__(self, curso, dia, hora_inicio, hora_fin):
         self.curso = curso
         self.dia = dia

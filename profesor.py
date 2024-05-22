@@ -73,7 +73,7 @@ class Profesor(Usuario):
         lista_estudiantes = []
         for curso in self._cursos:
             for estudiante in curso.estudiantes:
-                lista_estudiantes.append(estudiante.obtener_nombre()+ ' del curso: ' + curso.nombre)
+                lista_estudiantes.append(estudiante.obtener_nombre()+'('+curso.nombre+')')
         return lista_estudiantes
     
     # HORARIO

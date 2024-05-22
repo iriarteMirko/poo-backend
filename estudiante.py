@@ -12,7 +12,7 @@ class Estudiante(Usuario):
         self.calificaciones = []
     
     def __repr__(self):
-        return f'Estudiante({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.ciclo}, {self.carrera}, {self.universidad}, {self.codigo}), {self.obtener_cursos()}'
+        return f'Estudiante({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.ciclo}, {self.carrera}, {self.universidad}, {self.codigo}, {self.obtener_cursos()})'
     
     # GETTERS
     def obtener_datos(self):
@@ -64,6 +64,10 @@ class Estudiante(Usuario):
         return lista_profesores
     
     def calificar_profesor(self, profesor, puntuacion):
+        if not profesor.obtener_nombre() in self.ver_profesores():
+            print(f'No estás matriculado en ningún curso del profesor {profesor.obtener_nombre()} para calificarlo.')
+            return
+        
         for calificacion in self.calificaciones:
             if calificacion.obtener_profesor() == profesor:
                 print(f'Estudiante ya ha calificado al profesor {profesor.obtener_nombre()}.')

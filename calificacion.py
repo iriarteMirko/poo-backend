@@ -1,4 +1,7 @@
-class Calificacion:
+from icalificacion import ICalificacion
+
+
+class Calificacion(ICalificacion):
     def __init__(self, estudiante, profesor, puntuacion):
         self.estudiante = estudiante
         self.profesor = profesor
