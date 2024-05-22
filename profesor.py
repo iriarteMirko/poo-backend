@@ -1,6 +1,6 @@
 from usuario import Usuario
-from curso_factory import CursoFactory
-from horario_factory import HorarioFactory
+from fabrica_curso import FabricaCurso
+from fabrica_horario import FabricaHorario
 
 
 class Profesor(Usuario):
@@ -38,7 +38,7 @@ class Profesor(Usuario):
     
     # CURSO
     def crear_curso(self, nombre, descripcion):
-        factory = CursoFactory()
+        factory = FabricaCurso()
         curso = factory.crear_curso(nombre, descripcion, self)
         self._cursos.append(curso)
         print(f'Curso {curso.nombre} creado con exito.')
@@ -66,7 +66,7 @@ class Profesor(Usuario):
     # HORARIO
     def crear_horario(self, curso, dia, hora_inicio, hora_fin):
         if curso in self._cursos:
-            factory = HorarioFactory()
+            factory = FabricaHorario()
             horario = factory.crear_horario(curso, dia, hora_inicio, hora_fin)
             curso.horarios.append(horario)
             print(f'Horario creado con exito.')
