@@ -57,13 +57,15 @@ class Profesor(Usuario):
                 curso.nombre = nombre
             if descripcion:
                 curso.descripcion = descripcion
-            print(f'Curso "{curso.nombre}" modificado con éxito.')
+            print(f'Curso modificado con éxito.')
         else:
             print(f'No se puede modificar curso, el profesor no esta asignado al curso {curso.nombre}.')
     
     def eliminar_curso(self, curso):
         if curso in self._cursos:
             self._cursos.remove(curso)
+            for estudiante in curso.estudiantes:
+                estudiante.retirar_curso(curso)
             print(f'Curso "{curso.nombre}" eliminado con éxito.')
         else:
             print(f'No se puede eliminar curso, el profesor no esta asignado al curso {curso.nombre}.')
