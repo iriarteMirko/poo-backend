@@ -10,52 +10,52 @@ class Usuario(ABC):
         self._cursos = []
     
     # GETTERS
-    def get_nombre(self):
+    def obtener_nombre(self):
         return self._nombre
     
-    def get_apellidos(self):
+    def obtener_apellidos(self):
         return self._apellidos
     
-    def get_correo(self):
+    def obtener_correo(self):
         return self._correo
     
-    def get_contrasena(self):
+    def obtener_contrasena(self):
         return self._contrasena
     
-    def get_cursos(self):
+    def obtener_cursos(self):
         return [curso.nombre for curso in self._cursos]
     
     # SETTERS
-    def set_nombre(self, nuevo_nombre):
+    def modificar_nombre(self, nuevo_nombre):
         self._nombre = nuevo_nombre
     
-    def set_apellidos(self, nuevos_apellidos):
+    def modificar_apellidos(self, nuevos_apellidos):
         self._apellidos = nuevos_apellidos
     
-    def set_correo(self, nuevo_correo):
+    def modificar_correo(self, nuevo_correo):
         self._correo = nuevo_correo
     
-    def set_contrasena(self, nueva_contrasena):
+    def modificar_contrasena(self, nueva_contrasena):
         self._contrasena = nueva_contrasena
     
-    # METODOS    
+    # METODOS
     def iniciar_sesion(self, correo, contrasena):
-        if correo == self.get_correo() and contrasena == self.get_contrasena():
+        if correo == self.obtener_correo() and contrasena == self.obtener_contrasena():
             print('Sesion iniciada con exito.')
         else:
             print('Correo o contrasena incorrectos.')
     
     def recuperar_contrasena(self, correo):
-        if correo == self.get_correo():
-            print(f'La contrasena es: {self.get_contrasena()}')
+        if correo == self.obtener_correo():
+            print(f'La contrasena es: {self.obtener_contrasena()}')
         else:
             print('Correo incorrecto.')
     
     # METODOS ABSTRACTOS
     @abstractmethod
-    def get_datos(self):
+    def obtener_datos(self):
         pass
     
     @abstractmethod
-    def set_datos(self):
+    def modificar_datos(self):
         pass

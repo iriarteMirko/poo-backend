@@ -11,25 +11,28 @@ class Estudiante(Usuario):
         self.codigo = codigo
         self.calificaciones = []
     
+    def __repr__(self):
+        return f'Estudiante({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.ciclo}, {self.carrera}, {self.universidad}, {self.codigo}), {self.obtener_cursos()}'
+    
     # GETTERS
-    def get_datos(self):
+    def obtener_datos(self):
         return {
-            'nombre': self.get_nombre(),
-            'apellidos': self.get_apellidos(),
-            'correo': self.get_correo(),
+            'nombre': self.obtener_nombre(),
+            'apellidos': self.obtener_apellidos(),
+            'correo': self.obtener_correo(),
             'ciclo': self.ciclo,
             'carrera': self.carrera,
             'universidad': self.universidad,
             'codigo': self.codigo,
-            'cursos': self.get_cursos()
+            'cursos': self.obtener_cursos()
         }
     
     # SETTERS    
-    def set_datos(self, **kwargs):
-        self.set_nombre(kwargs.get('nombre', self.get_nombre()))
-        self.set_apellidos(kwargs.get('apellidos', self.get_apellidos()))
-        self.set_correo(kwargs.get('correo', self.get_correo()))
-        self.set_contrasena(kwargs.get('contrasena', self.get_contrasena()))
+    def modificar_datos(self, **kwargs):
+        self.modificar_nombre(kwargs.get('nombre', self.obtener_nombre()))
+        self.modificar_apellidos(kwargs.get('apellidos', self.obtener_apellidos()))
+        self.modificar_correo(kwargs.get('correo', self.obtener_correo()))
+        self.modificar_contrasena(kwargs.get('contrasena', self.obtener_contrasena()))
         self.ciclo = kwargs.get('ciclo', self.ciclo)
         self.carrera = kwargs.get('carrera', self.carrera)
         self.universidad = kwargs.get('universidad', self.universidad)
@@ -38,34 +41,36 @@ class Estudiante(Usuario):
     # CURSO
     def matricular_curso(self, curso):
         if curso in self._cursos:
-            print(f'Estudiante {self.get_nombre()} ya esta matriculado en el curso "{curso.nombre}".')
+            print(f'Estudiante {self.obtener_nombre()} ya esta matriculado en el curso "{curso.nombre}".')
         else:
             curso.estudiantes.append(self)
             self._cursos.append(curso)
-            print(f'Estudiante {self.get_nombre()} matriculado al curso "{curso.nombre}" con exito.')
+            print(f'Estudiante {self.obtener_nombre()} matriculado al curso "{curso.nombre}" con exito.')
     
     def retirar_curso(self, curso):
         if curso not in self._cursos:
-            print(f'Estudiante {self.get_nombre()} no esta matriculado en el curso "{curso.nombre}".')
+            print(f'Estudiante {self.obtener_nombre()} no esta matriculado en el curso "{curso.nombre}".')
         else:
             curso.estudiantes.remove(self)
             self._cursos.remove(curso)
-            print(f'Estudiante {self.get_nombre()} retirado del curso "{curso.nombre}".')
+            print(f'Estudiante {self.obtener_nombre()} retirado del curso "{curso.nombre}".')
     
     # PROFESOR
     def ver_profesores(self):
         lista_profesores = []
         for curso in self._cursos:
-            if curso.profesor.get_nombre() not in lista_profesores:
-                lista_profesores.append(curso.profesor.get_nombre())
+            if curso.profesor.obtener_nombre() not in lista_profesores:
+                lista_profesores.append(curso.profesor.obtener_nombre())
         return lista_profesores
     
     def calificar_profesor(self, profesor, puntuacion):
         for calificacion in self.calificaciones:
-            if calificacion.get_profesor() == profesor:
-                return f'Estudiante {self.get_nombre()} ya ha calificado al profesor {profesor.get_nombre()}.'
+            if calificacion.obtener_profesor() == profesor:
+                print(f'Estudiante ya ha calificado al profesor {profesor.obtener_nombre()}.')
+                return
         
         calificacion = Calificacion(self, profesor, puntuacion)
         self.calificaciones.append(calificacion)
-        profesor.recibir_calificacion(calificacion)
-        return f'Profesor {profesor.get_nombre()} calificado con éxito.'
+        profesor.recibir_calificacion(calificacion.obtener_puntuacion())
+        print(f'Profesor {profesor.obtener_nombre()} calificado con éxito.')
+        return

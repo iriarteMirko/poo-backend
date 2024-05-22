@@ -1,7 +1,4 @@
-from icurso import ICurso
-
-
-class Curso(ICurso):
+class Curso:
     def __init__(self, nombre, descripcion, profesor):
         self.nombre = nombre
         self.descripcion = descripcion
@@ -9,21 +6,35 @@ class Curso(ICurso):
         self.estudiantes = []
         self.horarios = []
     
-    def get_datos(self):
+    def __repr__(self):
+        return f'Curso({self.nombre}, {self.descripcion}, {self.obtener_profesor()}, {self.obtener_estudiantes()}, {self.obtener_horarios()})'
+    
+    def obtener_datos(self):
         return {
             'nombre': self.nombre,
             'descripcion': self.descripcion,
-            'profesor': self.get_profesor(),
-            'estudiantes': self.get_estudiantes(),
-            'horarios': self.get_horarios()
+            'profesor': self.obtener_profesor(),
+            'estudiantes': self.obtener_estudiantes(),
+            'horarios': self.obtener_horarios()
         }
     
-    def get_profesor(self):
-        return self.profesor.get_nombre() + ' ' + self.profesor.get_apellidos()
+    def obtener_profesor(self):
+        return self.profesor.obtener_nombre() + ' ' + self.profesor.obtener_apellidos()
     
-    def get_estudiantes(self):
-        return [estudiante.get_nombre() for estudiante in self.estudiantes]
+    def obtener_estudiantes(self):
+        return [estudiante.obtener_nombre() for estudiante in self.estudiantes]
     
-    def get_horarios(self):
-        return [horario.get_datos() for horario in self.horarios]
-
+    def obtener_horarios(self):
+        return [horario.obtener_datos() for horario in self.horarios]
+    
+    def agregar_estudiante(self, estudiante):
+        self.estudiantes.append(estudiante)
+    
+    def eliminar_estudiante(self, estudiante):
+        self.estudiantes.remove(estudiante)
+    
+    def agregar_horario(self, horario):
+        self.horarios.append(horario)
+    
+    def eliminar_horario(self, horario):
+        self.horarios.remove(horario)

@@ -1,24 +1,24 @@
-from icalificacion import ICalificacion
-
-
-class Calificacion(ICalificacion):
+class Calificacion:
     def __init__(self, estudiante, profesor, puntuacion):
         self.estudiante = estudiante
         self.profesor = profesor
         self.puntuacion = puntuacion
-
-    def get_datos(self):
+    
+    def __repr__(self):
+        return f'Calificacion({self.estudiante.obtener_nombre()}, {self.profesor.obtener_nombre()}, {self.puntuacion})'
+    
+    def obtener_datos(self):
         return {
-            'estudiante': self.estudiante.get_nombre(),
-            'profesor': self.profesor.get_nombre(),
+            'estudiante': self.estudiante.obtener_nombre(),
+            'profesor': self.profesor.obtener_nombre(),
             'puntuacion': self.puntuacion
         }
-
-    def get_estudiante(self):
+    
+    def obtener_estudiante(self):
         return self.estudiante
-
-    def get_profesor(self):
+    
+    def obtener_profesor(self):
         return self.profesor
-
-    def get_puntuacion(self):
+    
+    def obtener_puntuacion(self):
         return self.puntuacion
