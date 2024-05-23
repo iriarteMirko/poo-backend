@@ -128,3 +128,6 @@ class Profesor(Usuario):
         if self._puntuaciones:
             return sum(self._puntuaciones) / len(self._puntuaciones)
         return 0
+    
+    def quitar_puntuacion(self, puntuacion):
+        self._puntuaciones.remove(puntuacion)

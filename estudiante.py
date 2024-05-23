@@ -125,8 +125,21 @@ class Estudiante(Usuario):
         print(f'Profesor {profesor.get_nombre()} calificado con éxito.')
         return
     
-    def moficicar_calificacion(self):
-        pass
+    def moficicar_calificacion(self, profesor, puntuacion):
+        for calificacion in self.get_calificaciones():
+            if calificacion.get_profesor() == profesor:
+                calificacion.set_puntuacion(puntuacion)
+                print(f'Calificacion modificada con éxito.')
+                return
+            else:
+                print(f'No se puede modificar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
     
-    def eliminar_calificacion(self):
-        pass
+    def eliminar_calificacion(self, profesor):
+        for calificacion in self.get_calificaciones():
+            if calificacion.get_profesor() == profesor:
+                self.get_calificaciones().remove(calificacion)
+                profesor.quitar_puntuacion(calificacion.get_puntuacion())
+                print(f'Calificacion eliminada con éxito.')
+                return
+            else:
+                print(f'No se puede eliminar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
