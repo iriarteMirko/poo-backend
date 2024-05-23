@@ -3,14 +3,14 @@ from calificacion import Calificacion
 
 
 class Estudiante(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, universidad, carrera, ciclo, codigo):
+    def __init__(self, nombre:str, apellidos:str, correo:str, contrasena:str, universidad:str, carrera:str, ciclo:str, codigo:str):
         super().__init__(nombre, apellidos, correo, contrasena)
-        self._universidad = universidad
-        self._carrera = carrera
-        self._ciclo = ciclo
-        self._codigo = codigo
-        self._cursos_favoritos = []
-        self._calificaciones = []
+        self._universidad:str = universidad
+        self._carrera:str = carrera
+        self._ciclo:str = ciclo
+        self._codigo:str = codigo
+        self._cursos_favoritos:list = []
+        self._calificaciones:list = []
     
     def __repr__(self):
         return (f'Estudiante(nombre={self.get_nombre()}, apellidos={self.get_apellidos()}, correo={self.get_correo()}, contrasena={self.get_contrasena()}, universidad={self.get_universidad()}, carrera={self.get_carrera()}, ciclo={self.get_ciclo()}, codigo={self.get_codigo()}, cursos={[curso.get_nombre() for curso in self.get_cursos()]})')
@@ -18,26 +18,26 @@ class Estudiante(Usuario):
     def get_universidad(self):
         return self._universidad
     
-    def set_universidad(self, universidad):
-        self._universidad = universidad
+    def set_universidad(self, universidad:str):
+        self._universidad:str = universidad
     
     def get_carrera(self):
         return self._carrera
     
-    def set_carrera(self, carrera):
-        self._carrera = carrera
+    def set_carrera(self, carrera:str):
+        self._carrera:str = carrera
     
     def get_ciclo(self):
         return self._ciclo
     
-    def set_ciclo(self, ciclo):
-        self._ciclo = ciclo
+    def set_ciclo(self, ciclo:str):
+        self._ciclo:str = ciclo
     
     def get_codigo(self):
         return self._codigo
     
-    def set_codigo(self, codigo):
-        self._codigo = codigo
+    def set_codigo(self, codigo:str):
+        self._codigo:str = codigo
     
     def get_cursos_favoritos(self):
         return self._cursos_favoritos
@@ -70,7 +70,7 @@ class Estudiante(Usuario):
         self.set_codigo(kwargs.get('codigo', self.get_codigo()))
     
     # CURSO
-    def matricular_curso(self, curso):
+    def matricular_curso(self, curso:object):
         if curso in self.get_cursos():
             print(f'Estudiante {self.get_nombre()} ya esta matriculado en el curso "{curso.get_nombre()}".')
         else:
@@ -78,7 +78,7 @@ class Estudiante(Usuario):
             self.agregar_curso(curso)
             print(f'Estudiante {self.get_nombre()} matriculado al curso "{curso.get_nombre()}" con exito.')
     
-    def retirar_curso(self, curso):
+    def retirar_curso(self, curso:object):
         if curso not in self.get_cursos():
             print(f'Estudiante {self.get_nombre()} no esta matriculado en el curso "{curso.get_nombre()}".')
         else:
@@ -87,14 +87,14 @@ class Estudiante(Usuario):
             print(f'Estudiante {self.get_nombre()} retirado del curso "{curso.get_nombre()}".')
     
     # FAVORITOS
-    def agregar_curso_favorito(self, curso):
+    def agregar_curso_favorito(self, curso:object):
         if curso in self.get_cursos_favoritos():
             print(f'El curso "{curso.get_nombre()}" ya esta en favoritos.')
         else:
             self.get_cursos_favoritos().append(curso)
             print(f'Curso "{curso.get_nombre()}" agregado a favoritos.')
     
-    def quitar_curso_favorito(self, curso):
+    def quitar_curso_favorito(self, curso:object):
         if curso not in self.get_cursos_favoritos():
             print(f'El curso "{curso.get_nombre()}" no esta en favoritos.')
         else:
@@ -109,7 +109,7 @@ class Estudiante(Usuario):
                 lista_profesores.append(curso.get_profesor().get_nombre())
         return lista_profesores
     
-    def calificar_profesor(self, profesor, puntuacion):
+    def calificar_profesor(self, profesor:object, puntuacion:int):
         if not profesor.get_nombre() in self.ver_profesores():
             print(f'No estás matriculado en ningún curso del profesor {profesor.get_nombre()} para calificarlo.')
             return
@@ -125,21 +125,22 @@ class Estudiante(Usuario):
         print(f'Profesor {profesor.get_nombre()} calificado con éxito.')
         return
     
-    def moficicar_calificacion(self, profesor, puntuacion):
+    def moficicar_calificacion(self, profesor:object, puntuacion_nueva:int):
         for calificacion in self.get_calificaciones():
             if calificacion.get_profesor() == profesor:
-                calificacion.set_puntuacion(puntuacion)
+                profesor.modificar_puntuacion(calificacion.get_puntuacion(), puntuacion_nueva)
+                calificacion.set_puntuacion(puntuacion_nueva)
                 print(f'Calificacion modificada con éxito.')
                 return
-            else:
-                print(f'No se puede modificar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
+        print(f'No se puede modificar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
+        return
     
-    def eliminar_calificacion(self, profesor):
+    def eliminar_calificacion(self, profesor:object):
         for calificacion in self.get_calificaciones():
             if calificacion.get_profesor() == profesor:
                 self.get_calificaciones().remove(calificacion)
                 profesor.quitar_puntuacion(calificacion.get_puntuacion())
                 print(f'Calificacion eliminada con éxito.')
                 return
-            else:
-                print(f'No se puede eliminar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
+        print(f'No se puede eliminar calificacion, el estudiante no ha calificado al profesor {profesor.get_nombre()}.')
+        return

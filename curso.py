@@ -2,10 +2,10 @@ from icurso import ICurso
 
 
 class Curso(ICurso):
-    def __init__(self, nombre, descripcion, profesor):
+    def __init__(self, nombre:str, descripcion:str, profesor:object):
         super().__init__(nombre, descripcion, profesor)
-        self._estudiantes = []
-        self._horarios = []
+        self._estudiantes:list = []
+        self._horarios:list = []
     
     def __repr__(self):
         return (f'Curso(nombre={self.get_nombre()}, descripcion={self.get_descripcion()}, Profesor={self.get_profesor().get_nombre()}, estudiantes={[estudiante.get_nombre() for estudiante in self.get_estudiantes()]}, horarios={[horario.get_datos() for horario in self.get_horarios()]})')
@@ -25,14 +25,14 @@ class Curso(ICurso):
     def get_horarios(self):
         return self._horarios
     
-    def agregar_estudiante(self, estudiante):
+    def agregar_estudiante(self, estudiante:object):
         self._estudiantes.append(estudiante)
     
-    def retirar_estudiante(self, estudiante):
+    def retirar_estudiante(self, estudiante:object):
         self._estudiantes.remove(estudiante)
     
-    def agregar_horario(self, horario):
+    def agregar_horario(self, horario:object):
         self._horarios.append(horario)
     
-    def eliminar_horario(self, horario):
+    def eliminar_horario(self, horario:object):
         self._horarios.remove(horario)

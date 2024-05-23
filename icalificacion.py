@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class ICalificacion(ABC):
-    def __init__(self, estudiante, profesor):
-        self._estudiante = estudiante
-        self._profesor = profesor
+    def __init__(self, estudiante:object, profesor:object):
+        self._estudiante:object = estudiante
+        self._profesor:object = profesor
     
     # Estudiante solo get
     def get_estudiante(self):
@@ -13,8 +13,8 @@ class ICalificacion(ABC):
     def get_profesor(self):
         return self._profesor
     
-    def set_profesor(self, profesor):
-        self._profesor = profesor
+    def set_profesor(self, profesor:object):
+        self._profesor:object = profesor
     
     # METODOS ABSTRACTOS
     @abstractmethod
