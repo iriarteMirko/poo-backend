@@ -11,48 +11,65 @@ class Profesor(Usuario):
         self.puntuaciones = []
     
     def __repr__(self):
-        return f'Profesor({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.profesion}, {self.centro_laboral}), {self.obtener_cursos()}, {self.obtener_puntuacion()}'
+        return (f'Profesor({self.nombre}, {self.apellidos}, {self.correo}, {self.contrasena}, {self.profesion}, {self.centro_laboral}, {self.cursos}, {self.puntuacion})')
     
-    # GETTERS
-    def obtener_datos(self):
-        return {
-            'nombre': self.obtener_nombre(),
-            'apellidos': self.obtener_apellidos(),
-            'correo': self.obtener_correo(),
-            'profesion': self.profesion,
-            'centro_laboral': self.centro_laboral,
-            'cursos': self.obtener_cursos(),
-            'puntuacion': self.obtener_puntuacion()
-        }
+    # PROPIEDADES
+    @property
+    def profesion(self):
+        return self.profesion
     
-    def obtener_puntuacion(self):
+    @profesion.setter
+    def profesion(self, profesion):
+        self.profesion = profesion
+    
+    @property
+    def centro_laboral(self):
+        return self.centro_laboral
+    
+    @centro_laboral.setter
+    def centro_laboral(self, centro_laboral):
+        self.centro_laboral = centro_laboral
+    
+    @property
+    def puntuacion(self):
         if self.puntuaciones:
             return sum(self.puntuaciones) / len(self.puntuaciones)
         return 0
     
-    # SETTERS
+    # METODOS
+    def obtener_datos(self):
+        return {
+            'nombre': self.nombre,
+            'apellidos': self.apellidos,
+            'correo': self.correo,
+            'profesion': self.profesion,
+            'centro_laboral': self.centro_laboral,
+            'cursos': self.cursos,
+            'puntuacion': self.puntuacion
+        }
+    
     def modificar_datos(self, **kwargs):
-        self.modificar_nombre(kwargs.get('nombre', self.obtener_nombre()))
-        self.modificar_apellidos(kwargs.get('apellidos', self.obtener_apellidos()))
-        self.modificar_correo(kwargs.get('correo', self.obtener_correo()))
-        self.modificar_contrasena(kwargs.get('contrasena', self.obtener_contrasena()))
+        self.nombre(kwargs.get('nombre', self.nombre))
+        self.apellidos(kwargs.get('apellidos', self.apellidos))
+        self.correo(kwargs.get('correo', self.correo))
+        self.contrasena(kwargs.get('contrasena', self.contrasena))
         self.profesion = kwargs.get('profesion', self.profesion)
         self.centro_laboral = kwargs.get('centro_laboral', self.centro_laboral)
     
     # CURSO
     def crear_curso(self, nombre, descripcion):
-        if any(curso.nombre == nombre for curso in self._cursos):
+        if any(curso.nombre == nombre for curso in self.cursos):
             print(f'Error: Ya existe un curso con el nombre "{nombre}".')
             return None
         
         factory = FabricaCurso()
         curso = factory.crear_curso(nombre, descripcion, self)
-        self._cursos.append(curso)
+        self.agregar_curso(curso)
         print(f'Curso {curso.nombre} creado con exito.')
         return curso
     
     def modificar_curso(self, curso, nombre=None, descripcion=None):
-        if curso in self._cursos:
+        if curso in self.cursos:
             if nombre:
                 curso.nombre = nombre
             if descripcion:
@@ -62,8 +79,8 @@ class Profesor(Usuario):
             print(f'No se puede modificar curso, el profesor no esta asignado al curso {curso.nombre}.')
     
     def eliminar_curso(self, curso):
-        if curso in self._cursos:
-            self._cursos.remove(curso)
+        if curso in self.cursos:
+            self.eliminar_curso(curso)
             for estudiante in curso.estudiantes:
                 estudiante.retirar_curso(curso)
             print(f'Curso "{curso.nombre}" eliminado con éxito.')
@@ -73,17 +90,17 @@ class Profesor(Usuario):
     # ESTUDIANTES
     def ver_estudiantes(self):
         lista_estudiantes = []
-        for curso in self._cursos:
+        for curso in self.cursos:
             for estudiante in curso.estudiantes:
-                lista_estudiantes.append(estudiante.obtener_nombre()+'('+curso.nombre+')')
+                lista_estudiantes.append(estudiante.nombre + '(' + curso.nombre + ')')
         return lista_estudiantes
     
     # HORARIO
     def crear_horario(self, curso, dia, hora_inicio, hora_fin):
-        if curso in self._cursos:
+        if curso in self.cursos:
             factory = FabricaHorario()
             horario = factory.crear_horario(curso, dia, hora_inicio, hora_fin)
-            curso.horarios.append(horario)
+            curso.agregar_horario(horario)
             print(f'Horario creado con exito.')
             return horario
         else:
@@ -91,7 +108,7 @@ class Profesor(Usuario):
             return None
     
     def modificar_horario(self, curso, horario, dia=None, hora_inicio=None, hora_fin=None):
-        if curso in self._cursos:
+        if curso in self.cursos:
             if horario in curso.horarios:
                 if dia:
                     horario.dia = dia
@@ -106,15 +123,15 @@ class Profesor(Usuario):
             print(f'No se puede modificar horario, el profesor no esta asignado al curso {curso.nombre}.')
     
     def eliminar_horario(self, curso, horario):
-        if curso in self._cursos:
+        if curso in self.cursos:
             if horario in curso.horarios:
-                curso.horarios.remove(horario)
+                curso.eliminar_horario(horario)
                 print('Horario eliminado con exito.')
             else:
                 print(f'No se puede eliminar horario, el horario no pertenece al curso {curso.nombre}.')
         else:
             print(f'No se puede eliminar horario, el profesor no esta asignado al curso {curso.nombre}.')
     
-    # RECIBIR CALIFICACIÓN
-    def recibir_calificacion(self, puntuacion):
+    # CALIFICACION
+    def agregar_calificacion(self, puntuacion):
         self.puntuaciones.append(puntuacion)

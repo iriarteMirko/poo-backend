@@ -7,15 +7,20 @@ class ICurso(ABC):
         self.descripcion = descripcion
         self.profesor = profesor
     
-    def obtener_nombre(self):
+    # PROPIEDADES
+    @property
+    def nombre(self):
         return self.nombre
     
-    def obtener_descripcion(self):
+    @property
+    def descripcion(self):
         return self.descripcion
     
-    def obtener_profesor(self):
-        return self.profesor.obtener_nombre()
+    @property
+    def profesor(self):
+        return self.profesor
     
+    # METODOS
     @abstractmethod
     def obtener_datos(self):
         pass

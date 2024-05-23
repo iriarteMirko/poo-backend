@@ -8,22 +8,28 @@ class Curso(ICurso):
         self.horarios = []
     
     def __repr__(self):
-        return f'Curso({self.obtener_nombre()}, {self.obtener_descripcion()}, {self.obtener_profesor()}, {self.obtener_estudiantes()}, {self.obtener_horarios()})'
+        return (f'Curso({self.nombre}, {self.descripcion}, {self.profesor.nombre}, 
+                {[estudiante.nombre for estudiante in self.estudiantes]}, 
+                {[horario.obtener_datos() for horario in self.horarios]})')
     
+    # PROPIEDADES
+    @property
+    def estudiantes(self):
+        return self.estudiantes
+    
+    @property
+    def horarios(self):
+        return self.horarios
+    
+    # METODOS
     def obtener_datos(self):
         return {
-            'nombre': self.obtener_nombre(),
-            'descripcion': self.obtener_descripcion(),
-            'profesor': self.obtener_profesor(),
-            'estudiantes': self.obtener_estudiantes(),
-            'horarios': self.obtener_horarios()
+            'nombre': self.nombre,
+            'descripcion': self.descripcion,
+            'profesor': self.profesor,
+            'estudiantes': self.estudiantes,
+            'horarios': self.horarios
         }
-    
-    def obtener_estudiantes(self):
-        return [estudiante.obtener_nombre() for estudiante in self.estudiantes]
-    
-    def obtener_horarios(self):
-        return [horario.obtener_datos() for horario in self.horarios]
     
     def agregar_estudiante(self, estudiante):
         self.estudiantes.append(estudiante)
