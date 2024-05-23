@@ -8,7 +8,7 @@ class Curso(ICurso):
         self._horarios = []
     
     def __repr__(self):
-        return (f'Curso({self.get_nombre()}, {self.get_descripcion()}, {self.get_profesor().get_nombre()}, {[estudiante.get_nombre() for estudiante in self.get_estudiantes()]}, {[horario.get_datos() for horario in self.get_horarios()]})')
+        return (f'Curso(nombre={self.get_nombre()}, descripcion={self.get_descripcion()}, Profesor={self.get_profesor().get_nombre()}, estudiantes={[estudiante.get_nombre() for estudiante in self.get_estudiantes()]}, horarios={[horario.get_datos() for horario in self.get_horarios()]})')
     
     def get_datos(self):
         return {

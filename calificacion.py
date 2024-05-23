@@ -7,7 +7,7 @@ class Calificacion(ICalificacion):
         self._puntuacion = puntuacion
     
     def __repr__(self):
-        return (f'Calificacion({self.get_estudiante().get_nombre()}, {self.get_profesor().get_nombre()}, {self.get_puntuacion()})')
+        return (f'Calificacion(Estudiante={self.get_estudiante().get_nombre()}, Profesor={self.get_profesor().get_nombre()}, puntuacion={self.get_puntuacion()})')
     
     def get_puntuacion(self):
         return self._puntuacion

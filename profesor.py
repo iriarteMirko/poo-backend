@@ -11,7 +11,7 @@ class Profesor(Usuario):
         self._puntuaciones = []
     
     def __repr__(self):
-        return (f'Profesor({self.get_nombre()}, {self.get_apellidos()}, {self.get_correo()}, {self.get_contrasena()}, {self.get_profesion()}, {self.get_centro_laboral()}, {self.get_cursos()}, {self.get_puntuacion()})')
+        return (f'Profesor(nombre={self.get_nombre()}, apellidos={self.get_apellidos()}, correo={self.get_correo()}, contrasena={self.get_contrasena()}, profesion={self.get_profesion()}, centro_laboral={self.get_centro_laboral()}, cursos={[curso.get_nombre() for curso in self.get_cursos()]}, puntuacion={self.get_puntuacion()})')
     
     def get_profesion(self):
         return self._profesion
@@ -32,7 +32,7 @@ class Profesor(Usuario):
             'correo': self.get_correo(),
             'profesion': self.get_profesion(),
             'centro_laboral': self.get_centro_laboral(),
-            'cursos': self.get_cursos(),
+            'cursos': [curso.get_nombre() for curso in self.get_cursos()],
             'puntuacion': self.get_puntuacion()
         }
     

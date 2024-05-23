@@ -9,7 +9,7 @@ class Horario(IHorario):
         self._hora_fin = hora_fin
     
     def __repr__(self):
-        return f'Horario({self.get_curso()}, {self.get_dia()}, {self.get_hora_inicio()}, {self.get_hora_fin()})'
+        return (f'Horario(Curso={self.get_curso()}, dia={self.get_dia()}, hora_inicio={self.get_hora_inicio()}, hora_fin={self.get_hora_fin()})')
     
     def get_datos(self):
         return {

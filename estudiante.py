@@ -3,23 +3,23 @@ from calificacion import Calificacion
 
 
 class Estudiante(Usuario):
-    def __init__(self, nombre, apellidos, correo, contrasena, ciclo, carrera, universidad, codigo):
+    def __init__(self, nombre, apellidos, correo, contrasena, universidad, carrera, ciclo, codigo):
         super().__init__(nombre, apellidos, correo, contrasena)
-        self._ciclo = ciclo
-        self._carrera = carrera
         self._universidad = universidad
+        self._carrera = carrera
+        self._ciclo = ciclo
         self._codigo = codigo
         self._cursos_favoritos = []
         self._calificaciones = []
     
     def __repr__(self):
-        return (f'Estudiante({self.get_nombre()}, {self.get_apellidos()}, {self.get_correo()}, {self.get_contrasena()}, {self.get_ciclo()}, {self.get_carrera()}, {self.get_universidad()}, {self.get_codigo()}, {[curso.get_nombre() for curso in self.get_cursos()]})')
+        return (f'Estudiante(nombre={self.get_nombre()}, apellidos={self.get_apellidos()}, correo={self.get_correo()}, contrasena={self.get_contrasena()}, universidad={self.get_universidad()}, carrera={self.get_carrera()}, ciclo={self.get_ciclo()}, codigo={self.get_codigo()}, cursos={[curso.get_nombre() for curso in self.get_cursos()]})')
     
-    def get_ciclo(self):
-        return self._ciclo
+    def get_universidad(self):
+        return self._universidad
     
-    def set_ciclo(self, ciclo):
-        self._ciclo = ciclo
+    def set_universidad(self, universidad):
+        self._universidad = universidad
     
     def get_carrera(self):
         return self._carrera
@@ -27,11 +27,11 @@ class Estudiante(Usuario):
     def set_carrera(self, carrera):
         self._carrera = carrera
     
-    def get_universidad(self):
-        return self._universidad
+    def get_ciclo(self):
+        return self._ciclo
     
-    def set_universidad(self, universidad):
-        self._universidad = universidad
+    def set_ciclo(self, ciclo):
+        self._ciclo = ciclo
     
     def get_codigo(self):
         return self._codigo
