@@ -12,7 +12,7 @@ class Estudiante(Usuario):
         self.calificaciones = []
     
     def __repr__(self):
-        return f'Estudiante({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.ciclo}, {self.carrera}, {self.universidad}, {self.codigo}, {self.obtener_cursos()})'
+        return f'Estudiante({self.obtener_nombre()}, {self.obtener_apellidos()}, {self.obtener_correo()}, {self.obtener_contrasena()}, {self.obtener_ciclo()}, {self.obtener_carrera()}, {self.obtener_universidad()}, {self.obtener_codigo()}, {self.obtener_cursos()})'
     
     # GETTERS
     def obtener_datos(self):
@@ -20,12 +20,27 @@ class Estudiante(Usuario):
             'nombre': self.obtener_nombre(),
             'apellidos': self.obtener_apellidos(),
             'correo': self.obtener_correo(),
-            'ciclo': self.ciclo,
-            'carrera': self.carrera,
-            'universidad': self.universidad,
-            'codigo': self.codigo,
+            'ciclo': self.obtener_ciclo(),
+            'carrera': self.obtener_carrera(),
+            'universidad': self.obtener_universidad(),
+            'codigo': self.obtener_codigo(),
             'cursos': self.obtener_cursos()
         }
+    
+    def obtener_ciclo(self):
+        return self.ciclo
+    
+    def obtener_carrera(self):
+        return self.carrera
+    
+    def obtener_universidad(self):
+        return self.universidad
+    
+    def obtener_codigo(self):
+        return self.codigo
+    
+    def obtener_calificaciones(self):
+        return [f'[{calificacion.obtener_profesor()}: {calificacion.obtener_puntuacion()}]' for calificacion in self.calificaciones]
     
     # SETTERS    
     def modificar_datos(self, **kwargs):

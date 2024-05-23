@@ -3,26 +3,21 @@ from icurso import ICurso
 
 class Curso(ICurso):
     def __init__(self, nombre, descripcion, profesor):
-        self.nombre = nombre
-        self.descripcion = descripcion
-        self.profesor = profesor
+        super().__init__(nombre, descripcion, profesor)
         self.estudiantes = []
         self.horarios = []
     
     def __repr__(self):
-        return f'Curso({self.nombre}, {self.descripcion}, {self.obtener_profesor()}, {self.obtener_estudiantes()}, {self.obtener_horarios()})'
+        return f'Curso({self.obtener_nombre()}, {self.obtener_descripcion()}, {self.obtener_profesor()}, {self.obtener_estudiantes()}, {self.obtener_horarios()})'
     
     def obtener_datos(self):
         return {
-            'nombre': self.nombre,
-            'descripcion': self.descripcion,
+            'nombre': self.obtener_nombre(),
+            'descripcion': self.obtener_descripcion(),
             'profesor': self.obtener_profesor(),
             'estudiantes': self.obtener_estudiantes(),
             'horarios': self.obtener_horarios()
         }
-    
-    def obtener_profesor(self):
-        return self.profesor.obtener_nombre() + ' ' + self.profesor.obtener_apellidos()
     
     def obtener_estudiantes(self):
         return [estudiante.obtener_nombre() for estudiante in self.estudiantes]
