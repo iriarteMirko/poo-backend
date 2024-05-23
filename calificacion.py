@@ -4,20 +4,20 @@ from icalificacion import ICalificacion
 class Calificacion(ICalificacion):
     def __init__(self, estudiante, profesor, puntuacion):
         super().__init__(estudiante, profesor)
-        self.puntuacion = puntuacion
+        self._puntuacion = puntuacion
     
     def __repr__(self):
-        return (f'Calificacion({self.estudiante.nombre}, {self.profesor.nombre}, {self.puntuacion})')
+        return (f'Calificacion({self.get_estudiante().get_nombre()}, {self.get_profesor().get_nombre()}, {self.get_puntuacion()})')
     
-    # PROPIEDADES
-    @property
-    def puntuacion(self):
-        return self.puntuacion
+    def get_puntuacion(self):
+        return self._puntuacion
     
-    # METODOS
-    def obtener_datos(self):
+    def set_puntuacion(self, puntuacion):
+        self._puntuacion = puntuacion
+    
+    def get_datos(self):
         return {
-            'estudiante': self.estudiante.nombre,
-            'profesor': self.profesor.nombre,
-            'puntuacion': self.puntuacion
+            'estudiante': self.get_estudiante().get_nombre(),
+            'profesor': self.get_profesor().get_nombre(),
+            'puntuacion': self.get_puntuacion()
         }

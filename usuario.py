@@ -9,65 +9,54 @@ class Usuario(ABC):
         self._contrasena = contrasena
         self._cursos = []
     
-    # PROPIEDADES
-    @property
-    def nombre(self):
+    def get_nombre(self):
         return self._nombre
     
-    @nombre.setter
-    def nombre(self, nuevo_nombre):
+    def set_nombre(self, nuevo_nombre):
         self._nombre = nuevo_nombre
     
-    @property
-    def apellidos(self):
+    def get_apellidos(self):
         return self._apellidos
     
-    @apellidos.setter
-    def apellidos(self, nuevos_apellidos):
+    def set_apellidos(self, nuevos_apellidos):
         self._apellidos = nuevos_apellidos
     
-    @property
-    def correo(self):
+    def get_correo(self):
         return self._correo
     
-    @correo.setter
-    def correo(self, nuevo_correo):
+    def set_correo(self, nuevo_correo):
         self._correo = nuevo_correo
     
-    @property
-    def contrasena(self):
+    def get_contrasena(self):
         return self._contrasena
     
-    @contrasena.setter
-    def contrasena(self, nueva_contrasena):
+    def set_contrasena(self, nueva_contrasena):
         self._contrasena = nueva_contrasena
     
-    @property
-    def cursos(self):
-        return [curso.nombre for curso in self.cursos]
+    def get_cursos(self):
+        return self._cursos
     
-    # METODOS
     def iniciar_sesion(self, correo, contrasena):
-        if correo == self.correo and contrasena == self.contrasena:
+        if correo == self.get_correo() and contrasena == self.get_contrasena():
             print('Sesion iniciada con exito.')
         else:
             print('Correo o contrasena incorrectos.')
     
     def recuperar_contrasena(self, correo):
-        if correo == self.correo:
-            print(f'La contrasena es: {self.contrasena}')
+        if correo == self.get_correo():
+            print(f'La contrasena es: {self.get_contrasena()}')
         else:
             print('Correo incorrecto.')
     
     def agregar_curso(self, curso):
-        self.cursos.append(curso)
+        self._cursos.append(curso)
     
-    def eliminar_curso(self, curso):
-        self.cursos.remove(curso)
+    def quitar_curso(self, curso):
+        self._cursos.remove(curso)
     
     # METODOS ABSTRACTOS
     @abstractmethod
-    def obtener_datos(self):
+    def get_datos(self):
         pass
     
     @abstractmethod

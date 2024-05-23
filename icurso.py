@@ -3,24 +3,26 @@ from abc import ABC, abstractmethod
 
 class ICurso(ABC):
     def __init__(self, nombre, descripcion, profesor):
-        self.nombre = nombre
-        self.descripcion = descripcion
-        self.profesor = profesor
+        self._nombre = nombre
+        self._descripcion = descripcion
+        self._profesor = profesor
     
-    # PROPIEDADES
-    @property
-    def nombre(self):
-        return self.nombre
+    def get_nombre(self):
+        return self._nombre
     
-    @property
-    def descripcion(self):
-        return self.descripcion
+    def set_nombre(self, nombre):
+        self._nombre = nombre
     
-    @property
-    def profesor(self):
-        return self.profesor
+    def get_descripcion(self):
+        return self._descripcion
     
-    # METODOS
+    def set_descripcion(self, descripcion):
+        self._descripcion = descripcion
+    
+    # Profesor solo get
+    def get_profesor(self):
+        return self._profesor
+    
     @abstractmethod
-    def obtener_datos(self):
+    def get_datos(self):
         pass
